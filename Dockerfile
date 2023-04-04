@@ -5,7 +5,7 @@ LABEL version='1.0'
 
 # install all apt package for nao robot
 RUN apt-get update
-RUN apt-get install -y git wget unzip terminator\
+RUN apt-get install -y git wget unzip terminator nano\
     && apt-get install -y ros-kinetic-nao-robot ros-kinetic-naoqi-driver
 
 # clean apt list to reduce storage size
@@ -16,6 +16,8 @@ WORKDIR /naoqi
 COPY ./pynaoqi-python2.7-2.5.5.5-linux64.zip .
 COPY ./run_nao_bringup.sh .
 COPY ./run_naoqi_driver.sh .
+COPY ./boot_config.json /opt/ros/kinetic/share/naoqi_driver/share/
+
 
 # install naoqi2.5 driver
 RUN unzip /naoqi/pynaoqi-python2.7-2.5.5.5-linux64.zip
